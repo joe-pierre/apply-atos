@@ -1,0 +1,4 @@
+.form-row.applicant_name {
+    display: flex;
+    flex-direction: row;
+}
