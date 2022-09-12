@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ApplicantRepository::class)]
 #[ORM\Table(name: "applicants")]
-#[Vich\Uploadable]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
 class Applicant
 {
     #[ORM\Id]
@@ -39,7 +39,7 @@ class Applicant
     #[ORM\Column(length: 255)]
     private ?string $resume = null;
 
-    #[Vich\UploadableField(mapping: "applicant_resumes", fileNameProperty: "resume")]
+    #[Vich\UploadableField(mapping: 'applicant_resumes', fileNameProperty: 'resume')]
     private ?File $resumeFile;
 
     #[ORM\Column]

@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ApplicantType extends AbstractType
 {
@@ -25,7 +27,13 @@ class ApplicantType extends AbstractType
             ->add('email', EmailType::class, [])
             ->add('phone', TextType::class, [])
             ->add('experienceYears', IntegerType::class, [])
-            ->add('resume', TextType::class, [])
+            ->add('resumeFile', VichFileType::class, [
+                'label' => 'Upload file',
+                'required' => true,
+                'constraints' => [
+                    new NotBlank()
+                ]
+            ])
         ;
     }
 
