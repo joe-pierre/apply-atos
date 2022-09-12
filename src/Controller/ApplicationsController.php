@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Applicant;
 use App\Form\ApplicantType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,10 +13,11 @@ class ApplicationsController extends AbstractController
     #[Route('/', name: 'app_applications')]
     public function index(): Response
     {
-        $form = $this->createForm(ApplicantType::class);
+        $applicant = new Applicant;
+        $form = $this->createForm(ApplicantType::class, $applicant);
 
         // dd($form);
 
-        return $this->renderForm('applications/index.html.twig', compact("form"));
+        return $this->renderForm('apply.html.twig', compact("form"));
     }
 }

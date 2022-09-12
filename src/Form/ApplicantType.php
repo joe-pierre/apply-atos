@@ -5,11 +5,12 @@ namespace App\Form;
 use App\Config\Gender;
 use App\Entity\Applicant;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ApplicantType extends AbstractType
 {
@@ -18,14 +19,13 @@ class ApplicantType extends AbstractType
         $builder
             ->add('gender', EnumType::class, [
                 'class' => Gender::class
-                ])
+            ])
             ->add('firstname', TextType::class, [])
             ->add('lastname', TextType::class, [])
             ->add('email', EmailType::class, [])
             ->add('phone', TextType::class, [])
-            ->add('profession')
-            ->add('experienceYears')
-            ->add('resume')
+            ->add('experienceYears', IntegerType::class, [])
+            ->add('resume', TextType::class, [])
         ;
     }
 

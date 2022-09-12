@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Repository\ApplicantRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ApplicantRepository::class)]
+#[ORM\Table(name: "applicants")]
+#[Vich\Uploadable]
+#[ORM\HasLifecycleCallbacks]
 class Applicant
 {
     #[ORM\Id]
@@ -28,14 +33,20 @@ class Applicant
     #[ORM\Column(length: 255)]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $profession = null;
-
     #[ORM\Column]
     private ?int $experienceYears = null;
 
     #[ORM\Column(length: 255)]
     private ?string $resume = null;
+
+    #[Vich\UploadableField(mapping: "applicant_resumes", fileNameProperty: "resume")]
+    private ?File $resumeFile;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $submitedAt = null;
 
     public function getId(): ?int
     {
@@ -102,18 +113,6 @@ class Applicant
         return $this;
     }
 
-    public function getProfession(): ?string
-    {
-        return $this->profession;
-    }
-
-    public function setProfession(string $profession): self
-    {
-        $this->profession = $profession;
-
-        return $this;
-    }
-
     public function getExperienceYears(): ?int
     {
         return $this->experienceYears;
@@ -134,6 +133,49 @@ class Applicant
     public function setResume(string $resume): self
     {
         $this->resume = $resume;
+
+        return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $resumeFile
+     */
+    public function setResumeFile(?File $resumeFile = null): void
+    {
+        $this->resumeFile = $resumeFile;
+
+        if (null !== $resumeFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setSubmitedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getResumeFile(): ?File
+    {
+        return $this->resumeFile;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getSubmitedAt(): ?\DateTimeImmutable
+    {
+        return $this->submitedAt;
+    }
+
+    public function setSubmitedAt(\DateTimeImmutable $submitedAt): self
+    {
+        $this->submitedAt = $submitedAt;
 
         return $this;
     }
