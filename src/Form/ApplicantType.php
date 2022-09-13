@@ -51,11 +51,11 @@ class ApplicantType extends AbstractType
             ->add('phone', TelType::class, [
                 'constraints' => [
                     new NotBlank(message: 'This field is required'),
-                    new Regex(
-                        pattern: '/^[0-9]+$/',
-                        htmlPattern: '^[0-9]+$', 
-                        match: true, 
-                        message: 'Only numbers'),
+                    new Regex([
+                        'pattern' => '/^[0-9]+$/',
+                        'htmlPattern' => '^[0-9]+$', 
+                        'match' => true, 
+                        'message' => 'Only numbers']),
                     new Length(
                         min: 9, 
                         max: 9, 

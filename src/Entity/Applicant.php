@@ -197,4 +197,11 @@ class Applicant
 
         return $this;
     }
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->setCreatedAt(new \DateTimeImmutable);
+        $this->setSubmitedAt(new \DateTimeImmutable);
+    }
 }
