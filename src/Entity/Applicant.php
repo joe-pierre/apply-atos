@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Config\Gender;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Repository\ApplicantRepository;
@@ -19,7 +20,7 @@ class Applicant
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $gender = null;
+    private ?Gender $gender = null;
 
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
@@ -32,6 +33,10 @@ class Applicant
 
     #[ORM\Column(length: 255)]
     private ?string $phone = null;
+    
+    #[ORM\ManyToOne(inversedBy: 'applicants')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Position $position = null;
 
     #[ORM\Column]
     private ?int $experienceYears = null;
@@ -48,17 +53,18 @@ class Applicant
     #[ORM\Column]
     private ?\DateTimeImmutable $submitedAt = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getGender(): ?string
+    public function getGender(): ?Gender
     {
         return $this->gender;
     }
 
-    public function setGender(string $gender): self
+    public function setGender(Gender $gender): self
     {
         $this->gender = $gender;
 
@@ -109,6 +115,18 @@ class Applicant
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getPosition(): ?Position
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?Position $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }

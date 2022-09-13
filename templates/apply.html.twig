@@ -7,12 +7,6 @@
 <div class="mt-5 pt-4 title">
     <h2 class="text-center">ATOS | Apply for job</h2>
 </div>
-    {# {{form_start(form)}}
-        {{form_widget(form)}}
-        <input type="button" value="submit">
-    {{form_end(form)}} #}
-
-
 <div class="d-flex justify-content-center">
     {{form_start(form, {'attr': {'class': 'mt-3 row col-md-10 g-3'}})}}
         <div class="col-md-2">
@@ -32,40 +26,37 @@
         <div class="col-md-5">
             <label for="applicant_firstname" class="form-label">Frist Name</label>
             {{form_widget(form.firstname)}}
+            {{form_errors(form.firstname)}}
         </div>
         <div class="col-md-5">
             <label for="appplicant_lastname" class="form-label">Last Name</label>
             {{form_widget(form.lastname)}}
+            {{form_errors(form.lastname)}}
         </div>
         <div class="col-md-4">
             <label for="applicant_email" class="form-label">Email</label>
             {{form_widget(form.email, {'attr': {'placeholder': 'johndoe@example.com'}})}}
+            {{form_errors(form.email)}}
         </div>
         <div class="col-md-2">
             <label for="applicant_phone" class="form-label">Phone</label>
-            {{form_widget(form.phone, {'attr': {'placeholder': '77 123 45 67'}})}}
+            {{form_widget(form.phone, {'attr': {'type': 'tel', 'placeholder': '77XXXXXXX'}})}}
+            {{form_errors(form.phone)}}
         </div>
         <div class="col-md-6">
-            <label for="applicant_profession" class="form-label">Apply as</label>
-            <select class="form-select" name="profession" id="profession">
-            {# {{{% for item in items %}
-                <option value="">Other</option>
-            {% endfor %}}} #}
-                <option value="">Other</option>
-                <option value="">UI Designer</option>
-                <option value="">Software Engineer</option>
-                <option value="">Front end Developer</option>
-                <option value="">Back end Developer</option>
-                <option value="">Database Administrator</option>
-            </select>
+            <label for="applicant_position" class="form-label">Apply as</label>
+            {{form_widget(form.position)}}
+            {{form_errors(form.position)}}
         </div>
         <div class="col-md-4">
             <label for="applicant_experienceYears" class="form-label">Expreience Years</label>
             {{form_widget(form.experienceYears, {'attr': {'min': '0'}})}}
+            {{form_errors(form.experienceYears)}}
         </div>
         <div class="col">
-            <label for="formFile" class="form-label">Upload resume</label>
-            <input class="form-control" aria-label="Select file" type="file" id="formFile">
+            <label for="applicant_resumeFile_file" class="form-label">Resume</label>
+            {{form_widget(form.resumeFile)}}
+            {{form_errors(form.resumeFile)}}
         </div>
         <div class="col-12">
             <div class="form-check">
@@ -74,9 +65,9 @@
             </div>
         </div>
         <div class="mt-5 col-12">
-            <button type="submit" class="btn btn-lg btn-primary w-100">Apply</button>
+            <button type="submit" class="btn btn-lg btn-primary w-100" formnovalidate>Apply</button>
         </div>
-    {{form_end(form, {render_rest: false})}}
+    {{form_end(form, {render_rest: true})}}
 </div>    
 
 {% endblock %}
