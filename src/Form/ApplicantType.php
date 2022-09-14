@@ -59,8 +59,7 @@ class ApplicantType extends AbstractType
                     new Length(
                         min: 9, 
                         max: 9, 
-                        minMessage: 'At least {{ limit }} carchters',
-                        maxMessage: 'At most {{ limit }} carchters',
+                        exactMessage: 'Must contains {{ limit }} numbers',
                     )
                 ]
             ])

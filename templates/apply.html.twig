@@ -1,11 +1,11 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title "Applications | ATOS" %}
+{% block title 'Applications | '~ enterprise_name %}
 
 {% block body %}
 
 <div class="my-5 jopi__title">
-    <h1 class="h2 text-center"><span>ATOS</span> | Apply for job</h1>
+    <h1 class="h2 text-center"><span>{{enterprise_name}}</span> | Apply for job</h1>
 </div>
 <div class="jopi__form">
     <div class="d-flex justify-content-center">
