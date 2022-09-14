@@ -12,7 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApplicationsController extends AbstractController
 {
-    #[Route('/', name: 'app_applications')]
+    #[Route('/', name: 'app_home')]
+    public function home()
+    {
+        return $this->render('home.html.twig');
+    }
+    #[Route('/apply-for-job', name: 'app_application')]
     public function index(Request $request, ApplicantRepository $applicantRepo): Response
     {
         $applicant = new Applicant;
@@ -25,7 +30,7 @@ class ApplicationsController extends AbstractController
 
             $applicantRepo->add($applicant, flush: true);
 
-            return $this->redirectToRoute('app_applications');
+            return $this->redirectToRoute('app_home');
         }
 
         // dd($form);

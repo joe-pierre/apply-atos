@@ -1,4 +1,13 @@
-.form-row.applicant_name {
-    display: flex;
-    flex-direction: row;
+body {
+    background-color: #F1F1F1;
+}
+
+.jopi__title span {
+    color: #3594ca;
+}
+
+.jopi__form {
+    background-color: #EEF1FF;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
