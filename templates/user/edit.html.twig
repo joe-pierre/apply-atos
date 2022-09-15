@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Edit User | '~ enterprise_name %}
+
+{% block body %}
+    {{ include('user/partials/_navlinks.html.twig') }}
+
+    <h1 class="my-4 h2 text-center">Edit User</h1>
+
+    <div class="col-md-6 mx-auto">
+        <div class="jopi__form p-5">
+            {{ include('user/partials/_form.html.twig', {'button_label': 'Update'}) }}
+
+            <div class="mt-3">
+                <a href="{{ path('app_users') }}">back to list</a>
+            </div>
+
+            {{ include('user/partials/_delete_form.html.twig') }}
+        </div>
+    </div>
+    
+{% endblock %}

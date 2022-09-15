@@ -21,12 +21,20 @@
     </head>
     <body>
         <main role="main">
-            {% for message in app.flashes('success') %}
+            {# {% for message in app.flashes('success') %}
                 <div class="fixed bg-green-600 text-white py-2 px-4 rounded-xl bottom-3 right-3 text-sm">
                     {{ message }}
                 </div>
+            {% endfor %} #}
+
+            {% for type, messages in app.flashes(['success', 'error', 'info', 'warning']) %}
+                {% for message in messages %}
+                <div class="fixed bg-green-600 text-white py-2 px-4 rounded-xl bottom-3 right-3 text-sm" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
             {% endfor %}
-            
+
             <div class="container">
                 {% block body %}{% endblock %}
             </div>

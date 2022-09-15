@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Config\Gender;
+use App\Entity\Traits\Timestampable;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Repository\ApplicantRepository;
@@ -14,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[Vich\Uploadable]
 class Applicant
 {
+    use Timestampable;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -46,9 +49,6 @@ class Applicant
 
     #[Vich\UploadableField(mapping: 'applicant_resumes', fileNameProperty: 'resume')]
     private ?File $resumeFile;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $submitedAt = null;
@@ -172,18 +172,6 @@ class Applicant
     public function getResumeFile(): ?File
     {
         return $this->resumeFile;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     public function getSubmitedAt(): ?\DateTimeImmutable
