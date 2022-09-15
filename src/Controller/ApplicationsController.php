@@ -19,6 +19,7 @@ class ApplicationsController extends AbstractController
     {
         return $this->render('home.html.twig');
     }
+    
     #[Route('/apply-for-job', name: 'app_application')]
     public function index(Request $request, ApplicantRepository $applicantRepo, MailerInterface $mailer): Response
     {
