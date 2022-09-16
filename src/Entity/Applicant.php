@@ -192,4 +192,5 @@ class Applicant
         $this->setCreatedAt(new \DateTimeImmutable);
         $this->setSubmitedAt(new \DateTimeImmutable);
     }
+
 }

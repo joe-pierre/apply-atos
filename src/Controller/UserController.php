@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_users', methods: ['GET'])]
-    public function usersList(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/users_list.html.twig', [
             'users' => $userRepository->findAll(),
