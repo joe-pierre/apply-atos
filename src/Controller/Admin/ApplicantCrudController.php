@@ -15,12 +15,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -83,11 +80,12 @@ class ApplicantCrudController extends AbstractCrudController
                 ])
                 ->onlyOnForms(),
             TextField::new('resume')
-                ->setFormType(FileType::class)
+                ->setFormType(VichFileType::class)
                 ->setFormTypeOptions([
-                    'data_class' => null
+                    'data_class' => Applicant::class
                 ])
-                ->onlyOnDetail(),
+                ->setTemplatePath('resume.html.twig')
+                ->onlyOnIndex(),
         ];
     }
    

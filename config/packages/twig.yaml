@@ -4,6 +4,7 @@ twig:
 
     globals:
         enterprise_name: '%app.enterprise_name%'
+        applicant_resumes_file_path: '%app.path.applicant_resumes%'
 
 when@test:
     twig:
